@@ -1,13 +1,13 @@
+import pathToRegexp from 'path-to-regexp';
 import { fetchList } from '../services/customer';
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default {
-  namespace: 'customer',
-
+  namespace: 'item',
   state: {
     list: [],
     total: null,
-    loading: false, // 控制加载状态
-    current: null, // 当前分页信息
+    loading: false,
+    current: null,
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -24,7 +24,7 @@ export default {
   effects: {
    *fetchList({ payload }, { select, call, put }) {
      yield delay(300);
-     const { data } = yield call(fetchList);
+     const { data } = yield call(fetchList, 'all');
      if (data) {
        yield put({
          type: 'fetchListSuccess',
@@ -44,7 +44,7 @@ export default {
     fetchList(state) {
       return { ...state, loading: true, };
     },
-    showModal(){}, // 控制 Modal 显示状态的 reducer
+    showModal(){},
     hideModal(){},
     fetchListSuccess(state, action){
       return {...state, ...action.payload, loading: false};

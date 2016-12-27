@@ -1,0 +1,39 @@
+.container{
+    background-color: #fff;
+    .items{
+        &:nth-child(2n){
+            .item{
+                background-color: #efeef4;
+                color: #108ee9
+            }
+        }
+        &:nth-child(2n+1){
+            .item{
+                background-color: #fff;
+                color: #108ee9
+            }
+        }
+    }
+}
+:global {
+  .list-leave.list-leave-active,
+  .list-enter {
+    opacity: 0.01;
+  }
+  .list-leave,
+  .list-enter.list-enter-active {
+    opacity: 1;
+  }
+
+  .item-leave.item-leave-active,
+  .item-enter {
+    opacity: 0.01;
+    transform: translate(30px, 0);
+  }
+  .item-leave,
+  .item-enter.item-enter-active {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition: all .5s cubic-bezier(.55, 0, .1, 1);
+  }
+}

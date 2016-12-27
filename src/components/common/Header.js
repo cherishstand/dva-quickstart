@@ -1,7 +1,9 @@
 import React ,{ Component, PropTypes } from 'react';
-import { NavBar, Icon } from 'antd-mobile';
+import { NavBar, Icon, Popover } from 'antd-mobile';
 import { Link } from 'dva/router';
-import styles from './Header.css'
+import Popovers from './Popovers';
+import styles from './Header.css';
+
 class Header extends Component {
     render(){
         let iconName = null;
@@ -9,13 +11,13 @@ class Header extends Component {
         let title = '';
         switch(this.props.path){
             case '/':
-                rightContent = <Link to='setting'><Icon type='setting'/></Link>
+                rightContent = <Link to='setting' style={{color: 'inherit'}}><Icon type='setting'/></Link>
                 title = '卓谷科技'
                 break
             case '/customer':
                 iconName = 'left'
-                rightContent = <Icon type='plus'/>
-                title = '客户'
+                rightContent = <Popovers path={this.props.path} placement='bottomRight'><Icon type='plus'/></Popovers>
+                title = <Popovers path={this.props.path} placement='bottom'>全部<span className='am-popover-arrow'></span></Popovers>
                 break
             case '/setting':
                 iconName = 'left'
@@ -25,6 +27,7 @@ class Header extends Component {
                 iconName = 'left'
                 rightContent = <Icon type='logout'/>
                 title = '详情'
+                break;
         }
         return(
             <div>
