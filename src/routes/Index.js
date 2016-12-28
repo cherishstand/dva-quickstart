@@ -8,7 +8,7 @@ const Index = React.createClass({
         <nav>
               <ul className={styles.menu}>
                 <li><Link to="customer"><Icon type='user'/><span>客户</span></Link></li>
-                <li><Link to="contact"><Icon type='mail'/><span>联系人</span></Link></li>
+                <li><Link to="contacts"><Icon type='mail'/><span>联系人</span></Link></li>
                 <li><Link to="record"><i className="material-icons">&#xE8B0;</i>联系记录</Link></li>
                 <li><Link to="order"><i className="material-icons">&#xE8FE;</i>销售订单</Link></li>
                 <li><Link to="audit"><i className="material-icons">&#xE90A;</i>审批中心</Link></li>

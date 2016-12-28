@@ -11,10 +11,12 @@
     "classnames": "^2.2.5",
     "dva": "^1.1.0",
     "dva-loading": "^0.2.0",
+    "firebase": "^2.4.2",
     "history": "^4.5.0",
     "images": "^3.0.0",
     "path-to-regexp": "^1.7.0",
     "qs": "^6.3.0",
+    "rc-form": "^1.0.1",
     "rc-menu": "^5.0.8",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"

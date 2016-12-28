@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute} from 'dva/router';
+import { Router, Route, IndexRoute, Redirect } from 'dva/router';
 import Index from './routes/Index';
-import Customer from './routes/Customer';
 import Setting from './routes/Setting';
 import Detail from './routes/Detail';
 import Header from './components/common/Header';
@@ -22,7 +21,11 @@ export default ({history}) => {
         <Route path='setting' component={Setting}/>
         <Route path='customer'>
             <IndexRoute component={ListPage}/>
-            <Route path=':id' component={Detail}/>
+            <Route path=':itemId' component={Detail}/>
+        </Route>
+        <Route path='contacts'>
+            <IndexRoute component={ListPage}/>
+            <Route path=':itemId' component={Detail}/>
         </Route>
       </Route>
     </Router>

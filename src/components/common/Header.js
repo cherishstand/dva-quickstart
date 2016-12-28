@@ -6,16 +6,16 @@ import styles from './Header.css';
 
 class Header extends Component {
     render(){
-        let iconName = null;
+        let iconName = 'left';
         let rightContent = null;
         let title = '';
         switch(this.props.path){
             case '/':
+                iconName = null
                 rightContent = <Link to='setting' style={{color: 'inherit'}}><Icon type='setting'/></Link>
                 title = '卓谷科技'
                 break
             case '/customer':
-                iconName = 'left'
                 rightContent = <Popovers path={this.props.path} placement='bottomRight'><Icon type='plus'/></Popovers>
                 title = <Popovers path={this.props.path} placement='bottom'>全部<span className='am-popover-arrow'></span></Popovers>
                 break
@@ -24,7 +24,6 @@ class Header extends Component {
                 title = '设置'
                 break
             default :
-                iconName = 'left'
                 rightContent = <Icon type='logout'/>
                 title = '详情'
                 break;

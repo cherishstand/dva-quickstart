@@ -4,14 +4,16 @@ import { connect } from 'dva';
 import Search from '../components/common/Search';
 import Loading from '../components/common/Loading'
 import ItemList from '../components/ItemList';
-const ListPage = ({loading, list, location, current, total, dispatch}) => {
+import { listSelector } from '../models/list/selectors';
+const ListPage = ({loading, ids, location, current, total, dispatch}) => {
     return (
         <Layout>
             <Search />
             {
+                loading ? <Loading /> :
                 <ItemList
                     loading={loading}
-                    dataSource={list}
+                    dataSource={ids}
                     location={location}
                     current={current}
                     total={total}
@@ -21,13 +23,10 @@ const ListPage = ({loading, list, location, current, total, dispatch}) => {
         </Layout>
     )
 }
-ListPage.defaultProps = {
-
-}
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         loading: state.loading.global,
-        ...state.item
+        ...listSelector(state, ownProps)
     }
 }
 export default connect(mapStateToProps)(ListPage);

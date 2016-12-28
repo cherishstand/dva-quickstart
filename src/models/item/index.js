@@ -1,8 +1,8 @@
 import pathToRegexp from 'path-to-regexp';
-import { fetchList } from '../services/customer';
+import { fetchList } from '../../services/fn';
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default {
-  namespace: 'item',
+  namespace: 'list',
   state: {
     list: [],
     total: null,
@@ -12,12 +12,10 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(({pathname}) => {
-        if (pathname === '/customer') {
           dispatch({
             type: 'fetchList',
             payload: {}
           });
-        }
       });
     },
   },
