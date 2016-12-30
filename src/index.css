@@ -1,10 +1,12 @@
-
-:global {
+:global{
   html, body, #root {
     height: 100%;
   }
   .am-list-item,.am-input-item{
       padding: 0;
+  }
+  .am-popover-mask{
+      background-color: rgba(55, 55, 55, 0.2);
   }
 }
 body{

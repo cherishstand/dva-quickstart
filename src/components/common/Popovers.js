@@ -19,27 +19,22 @@ const Popovers = React.createClass({
         this.setState({visible})
     },
     render(){
-        const {children, placement} = this.props
+        const {children} = this.props
         return(
-                <Popover mask
+                <Popover
+                    mask
                     visible={this.state.visible}
                     name='createMenu'
-                    animationType='slide-up'
+                    className={styles.inner}
                     overlay={[
-                        (<Link to='/customer' activeClassName={styles.active}>
-                            <Popover.Item key='4' value='scan' style={{padding: '0 60px 0 20px'}}>创建</Popover.Item>
-                        </Link>),
-                        (<Link to='/customer' activeClassName={styles.active}>
-                            <Popover.Item key='5' value='special' style={{padding: '0 60px 0 20px'}}>快速创建</Popover.Item>
-                        </Link>),
+                        (<Popover.Item key='4' value='scan' className={styles.item}>创建</Popover.Item>),
+                        (<Popover.Item key='5' value='special' className={styles.item}>快速创建</Popover.Item>),
                     ]}
                     popupAlign={{
                         offset: [-10, 15]
                     }}
-                    placement={placement}
                     onVisibleChange={this._handleVisibleChange}
                     onSelect={this._onSelect}
-                    style={{background: 'red'}}
                 >
                     <div style={{
                         height: '100%',

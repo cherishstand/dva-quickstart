@@ -1,8 +1,11 @@
 const webpack = require('atool-build/lib/webpack');
-
+const pxtorem = require('postcss-pxtorem');
 module.exports = function(webpackConfig, env) {
   webpackConfig.babel.plugins.push('transform-runtime');
-
+  webpackConfig.postcss.push(pxtorem({
+    rootValue: 100,
+    propWhiteList: [],
+  }));
   // Support hmr
   if (env === 'development') {
     webpackConfig.devtool = '#eval';

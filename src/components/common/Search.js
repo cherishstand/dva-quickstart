@@ -6,22 +6,23 @@ const Search = React.createClass({
       value: '',
     };
   },
-  onChange(value) {
-    this.setState({ value });
+  handleValueChange(value) {
+    this.props.handleSearch(value);
   },
   clear() {
     this.setState({ value: '' });
   },
+  handleEnterKeyDown(value){
+      console.log(1);
+  },
   render() {
     return (<div>
       <SearchBar
-        value={this.state.value}
+        value={this.props.value || ''}
         placeholder="搜索"
-        onSubmit={(value) => {}}
-        onClear={(value) => {}}
-        onFocus={() => {}}
-        onBlur={() => {}}
-        onChange={this.onChange}
+        onClear={() => {}}
+        onKeyDown={this.handleEnterKeyDown}
+        onChange={this.handleValueChange}
       />
     </div>);
   },

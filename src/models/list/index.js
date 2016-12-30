@@ -1,9 +1,11 @@
 import pathToRegexp from 'path-to-regexp';
+import { routerRedux } from 'dva/router';
 import {
     fetchIdsByType,
     fetchItems,
     fetchItem,
-    fetchUI
+    fetchUI,
+    fetchIdsBySearch
  } from '../../services/fn';
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const ITEM_PATHS = ['customer', 'orders', 'contacts', 'records'];
@@ -11,28 +13,30 @@ const ITEM_PATHS = ['customer', 'orders', 'contacts', 'records'];
 export default {
   namespace: 'list',
   state: {
+    query: '',
+    page: 1,
+    activeMatch: 'all',
     activeType: null,
     itemsPerPage: 20,
     lists: {
         customer: [],
-        order: [],
-        contact: [],
-        record: []
+        orders: [],
+        contacts: [],
+        records: []
     },
-    total: null,
-    loading: false,
-    current: null,
-    itemsById: null
+    itemsById: null,
+    totalPage: null,
+    current: 1,
+    next: null,
   },
   subscriptions: {
     listSubscriber({ dispatch, history }) {
         let activeType = null;
-        function requestList(type, _page = 1){
-            const page = _page;
-            dispatch({type: 'saveActiveType', payload: type})
-            dispatch({ type: 'fetchList', payload: { type, page } });
+        function requestList(type){
+            dispatch({ type: 'saveActiveType', payload: type })
+            dispatch({ type: 'fetchList', payload: { type } });
         }
-      history.listen(({pathname}) => {
+      history.listen(({pathname})  => {
               for(let type of ITEM_PATHS) {
                  if(pathname === '/' + type){
                     requestList(type);
@@ -57,36 +61,62 @@ export default {
                 }
             }
         })
-    }
+    },
   },
   effects: {
-   *fetchList({ payload }, { select, call, put }) {
-         yield delay(300);
-         const { type, page } = payload;
-         const ids = yield call(fetchIdsByType, type);
-         const data = ids.data;
-         const itemsPerPage = yield select(state => state.list.itemsPerPage);
-         yield put({ type: 'saveList', payload: { data, type } });
+    *fetchList({ payload }, { select, call, put }) {
+        yield delay(300);
+        const { type } = payload;
+        const itemsPerPage = yield select(state => state.list.itemsPerPage);
+        const activeMatch = yield select(state => state.list.activeMatch);
+        const page = yield select(state => state.list.page);
+        const ids = yield call(fetchIdsByType, type, activeMatch, itemsPerPage, page),
+                    data = ids.data,
+                    totalPage = ids.pages,
+                    current = ids.current,
+                    next = ids.next;
+        yield put({ type: 'saveList', payload: { data, type, totalPage, current }});
     },
     *fetchComments({ payload }, { call, put }) {
         yield delay(300);
         const {type, itemId, mode} = payload;
-        let itemData = yield call(fetchItem, type, itemId);
-        let uiDate = yield call(fetchUI, mode);
-        let item = itemData.data, ui = uiDate.data;
+        const itemData = yield call(fetchItem, type, itemId),
+                        uiDate = yield call(fetchUI, mode),
+                        item = itemData.data,
+                        ui = uiDate.data;
         yield put({type: 'saveItems', payload: {item, ui}})
-    }
+    },
+    setQuery: [function*({ payload }, { put, call, select }) {
+        yield delay(300);
+        const type = yield select(state => state.list.activeType);
+        if(payload !== ''){
+            let data = yield call(fetchIdsBySearch, type, payload);
+            if(data.code === 200) {
+                data = data.data;
+                yield put({type: 'saveList', payload: {type, data}})
+            }
+        }
+    }, {type: 'takeLatest'}]
  },
   reducers: {
     saveList(state, { payload }) {
-        const { data, type } = payload;
-        return { ...state, lists: { ...state.lists, [type]: data }, loading: true }
+        const { data, type, totalPage, current, next} = payload;
+        return { ...state, lists: { ...state.lists, [type]: data }, totalPage: totalPage, current: current, next: next}
     },
     saveItems(state, { payload }) {
-        return { ...state, itemsById: { ...payload }, loading: true};
+        return { ...state, itemsById: { ...payload }};
     },
     saveActiveType(state, { payload: activeType }){
         return { ...state, activeType };
+    },
+    setQuery(state, { payload }) {
+        return { ...state, query: payload}
+    },
+    saveActiveMatch(state, { payload }) {
+        return {...state, activeMatch: payload}
+    },
+    refetchList(state, { payload }){
+        return {...state, page: payload}
     }
   }
 }
