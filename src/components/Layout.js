@@ -1,8 +1,9 @@
 import React from 'react';
-const Layout = (props) => {
+import Header from './common/Header';
+const Layout = ({children}) => {
     return(
         <div>
-            { props.children }
+            { children }
         </div>
     )
 }
