@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, InputItem, DatePicker, TextareaItem } from 'antd-mobile';
-import { createForm } from 'rc-form';
 import styles from './Item.less';
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -59,5 +58,4 @@ let Items = ({ui, item}) => {
         </div>
     )
 }
-Items = createForm()(Items);
 export default Items
