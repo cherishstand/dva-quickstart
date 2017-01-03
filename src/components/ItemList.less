@@ -14,6 +14,48 @@
             }
         }
     }
+    .contacts{
+        display: flex;
+        justify-content: center;
+        padding: 32px 60px 32px 30px;
+        flex-direction: column;
+        position: relative;
+        .text{
+            color: #7888af;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .brief{
+            font-size: 28px;
+            color: rgba(0, 0, 0, 0.541176);
+            .i{
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            i{
+                margin-right: 6px;
+            }
+        }
+        .btn{
+            padding: 24px;
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            i{
+                color: #a2dd86
+            }
+        }
+    }
+
+}
+.emtpy{
+    color: #7888af;
+    text-align: center;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 :global {
   .list-leave.list-leave-active,

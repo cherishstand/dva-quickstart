@@ -8,19 +8,25 @@ import styles from './Header.css';
 
 class Header extends Component {
     render(){
-        let iconName = 'left';
-        let rightContent = null;
-        let title = '';
-        const { path, loading, dispatch} = this.props;
+        let iconName = 'left'
+        let rightContent = null
+        let title = ''
+        const { path, loading, handleAciveType} = this.props;
         switch(path){
             case '/':
                 iconName = null
                 rightContent = <Link to='setting' style={{color: 'inherit'}}><Icon type='setting'/></Link>
                 title = '卓谷科技'
                 break
+            case '/contacts':
             case '/customer':
                 rightContent = <Popovers path={path}><Icon type='plus'/></Popovers>
-                title = <DropDownMenu path={path} dispatch={dispatch} typeItem={CONFIG[path.replace('/','')]}>全部<span className='am-popover-arrow'></span></DropDownMenu>
+                title = <DropDownMenu
+                            path={path}
+                            handleAciveType={handleAciveType}
+                            typeItem={CONFIG[path.replace('/', '')]}
+                        >
+                        </DropDownMenu>
                 break
             case '/setting':
                 title = '设置'
@@ -31,6 +37,10 @@ class Header extends Component {
             case '/setting/opinion':
                 title = '意见反馈'
                 break
+            case '/create':
+                title = '创建'
+                rightContent=<div>保存</div>
+                break;
             default :
                 rightContent = <Icon type='logout'/>
                 title = '详情'

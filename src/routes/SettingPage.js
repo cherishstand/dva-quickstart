@@ -6,7 +6,7 @@ import styles from './SettingPage.less';
 import Layout from '../components/Layout';
 const SettingPage = React.createClass({
     _handleClick(){
-        Toast.info('清除缓存成功', 1);
+        Toast.info('清除缓存成功', 20);
     },
     _loginOut() {
         console.log(1);

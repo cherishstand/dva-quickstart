@@ -13,7 +13,7 @@ module.exports = function(webpackConfig, env) {
   } else {
     webpackConfig.babel.plugins.push('dev-expression');
   }
-  webpackConfig.babel.plugins.push(['import', { libraryName: 'antd-mobile', style: 'css' }]);
+  webpackConfig.babel.plugins.push(['import', { libraryName: 'antd-mobile', style: true }]);
 
   // Don't extract common.js and common.css
   webpackConfig.plugins = webpackConfig.plugins.filter(function(plugin) {

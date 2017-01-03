@@ -1,24 +1,23 @@
 import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute, Redirect } from 'dva/router';
-import Index from './routes/Index';
+import App from './routes/App';
 import SettingPage from './routes/SettingPage';
 import ItemPage from './routes/ItemPage';
 import ListPage from './routes/ListPage';
 import About from './routes/About';
 import Opinion from './routes/Opinion';
 import Login from './routes/Login';
-const App = ({children, location}) => {
-  return (
-    <div>
-      {children}
-    </div>
-  )
+import CreatePage from './routes/CreatePage'
+const Mater = ({children}) => {
+    return (
+        <div>{children}</div>
+    )
 }
-export default ({history}) => {
+export default ({ history }) => {
   return (
     <Router history={history}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Index}/>
+      <Route path="/" component={Mater}>
+        <IndexRoute component={App}/>
         <Route path='/setting'>
             <IndexRoute component={SettingPage}/>
             <Route path='about' component={About} />
@@ -36,6 +35,7 @@ export default ({history}) => {
             <IndexRoute component={ListPage}/>
             <Route path=':itemId' component={ItemPage}/>
         </Route>
+        <Route path='/create' component={CreatePage}/>
       </Route>
     </Router>
   );

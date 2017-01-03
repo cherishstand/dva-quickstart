@@ -1,21 +1,38 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import Header from '../components/common/Header';
 import Search from '../components/common/Search';
 import Loading from '../components/common/Loading'
 import ItemList from '../components/ItemList';
 import { listSelector } from '../models/list/selectors';
-const ListPage = ({ids, location, loading, dispatch, query, activeType, totalPage, current, next}) => {
+const ListPage = ({
+    ids,
+    location: { pathname },
+    loading,
+    dispatch,
+    query,
+    activePath,
+    totalPage,
+    current,
+    next
+}) => {
     let handleSearch = (value) => {
         dispatch({
             type: 'list/setQuery',
             payload: value
         })
     };
+    let handleAciveType = (value) => {
+        dispatch(routerRedux.push({
+            pathname: '/' + activePath,
+            query: {type: value}
+        }))
+    };
     return (
         <Layout>
-            <Header path={location.pathname} loading={loading} dispatch={dispatch}/>
+            <Header path={pathname} handleAciveType={handleAciveType}/>
             <Search value={query} handleSearch={handleSearch}/>
             {
                 loading ? <Loading /> :
@@ -26,7 +43,7 @@ const ListPage = ({ids, location, loading, dispatch, query, activeType, totalPag
                         totalPage={totalPage}
                         current={current}
                         next={next}
-                        activeType={activeType}
+                        activePath={activePath}
                     />
             }
         </Layout>
@@ -34,7 +51,7 @@ const ListPage = ({ids, location, loading, dispatch, query, activeType, totalPag
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        loading: state.loading.global,
+        loading: state.loading.models.list,
         ...listSelector(state, ownProps)
     }
 }

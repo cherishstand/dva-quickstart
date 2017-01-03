@@ -19,7 +19,7 @@ const Popovers = React.createClass({
         this.setState({visible})
     },
     render(){
-        const {children} = this.props
+        const {children, path} = this.props
         return(
                 <Popover
                     mask
@@ -27,8 +27,12 @@ const Popovers = React.createClass({
                     name='createMenu'
                     className={styles.inner}
                     overlay={[
-                        (<Popover.Item key='4' value='scan' className={styles.item}>创建</Popover.Item>),
-                        (<Popover.Item key='5' value='special' className={styles.item}>快速创建</Popover.Item>),
+                        (<Link to={{pathname: '/create', query: {mode: 6}}}>
+                            <Popover.Item key='1' value='创建' className={styles.item}>创建</Popover.Item>
+                        </Link>),
+                        (<Link to={{pathname: '/create', query: {mode: 6, type: 'quick_create'}}}>
+                            <Popover.Item key='2' value='快速创建' className={styles.item}>快速创建</Popover.Item>
+                        </Link>),
                     ]}
                     popupAlign={{
                         offset: [-10, 15]

@@ -1,13 +1,7 @@
 :global{
-  html, body, #root {
-    height: 100%;
-  }
-  .am-list-item,.am-input-item{
-      padding: 0;
-  }
-  .am-popover-mask{
-      background-color: rgba(55, 55, 55, 0.2);
-  }
+    html, body, #root {
+        height: 100%;
+    }
 }
 body{
     background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url('./assets/background.jpg') no-repeat;

@@ -18,16 +18,14 @@ const Popovers = React.createClass({
             visible: false,
             selected: opt.props.title
         })
-        this.props.dispatch({
-            type: 'list/saveActiveMatch',
-            payload: opt.props.value
-        })
+        this.props.handleAciveType(opt.props.value)
     },
     _handleVisibleChange(visible){
         this.setState({visible})
     },
     render(){
         const {children, typeItem} = this.props
+        const { visible } = this.state;
         const overlay = [];
         for(let type in typeItem) {
             const isFocused = typeItem[type] === this.state.selected;
@@ -56,17 +54,16 @@ const Popovers = React.createClass({
                     onVisibleChange={this._handleVisibleChange}
                     onSelect={this._onSelect}
                     overlayStyle={{width: '65%'}}
-                    triggerStyle={{backgroundColor: '#000'}}
                 >
                     <div style={{
                         height: '100%',
                         padding: '0 0.3rem',
-                        marginRight: '-0.3rem',
                         display: 'flex',
                         alignItems: 'center',
+                        justifyContent: 'center'
                       }}
                     >
-                        {this.state.selected}
+                        {this.state.selected}<div className={classnames({[styles.caret]: true, [styles.down]: visible})}></div>
                     </div>
                 </Popover>
         )

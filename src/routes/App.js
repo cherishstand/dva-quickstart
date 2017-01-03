@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {Link} from 'dva/router';
 import Header from '../components/common/Header';
-import styles from './Index.css';
+import styles from './App.css';
 import { Icon } from 'antd-mobile';
-const Index = React.createClass({
+const App = React.createClass({
   render() {
     return (<div>
         <Header path={this.props.location.pathname}/>
@@ -24,4 +24,4 @@ const Index = React.createClass({
     </div>);
   },
 });
-export default Index
+export default App

@@ -29,6 +29,7 @@ let Comment = React.createClass({
                                                     {...getFieldDecorator([field.fieldname], {
                                                         initialValue: item[field.fieldname] || 'ss',
                                                     })}
+                                                    size='sm'
                                                     key={index}
                                                     placeholder='点击编辑'
                                                     className={styles.input}>
@@ -72,7 +73,7 @@ let Comment = React.createClass({
     render(){
         const layout = this.drawing();
         return(
-            <div>{layout}</div>
+            <List style={{height: 'calc(100vh - 0.9rem)', overflowY: 'auto', overflowX: 'hidden'}}>{layout}</List>
         )
     }
 })
