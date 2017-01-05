@@ -7,6 +7,9 @@ import ListPage from './routes/ListPage';
 import About from './routes/About';
 import Opinion from './routes/Opinion';
 import Login from './routes/Login';
+import Photo from './routes/Photo';
+import Audits from './routes/Audits'
+import Check from './routes/Check'
 import CreatePage from './routes/CreatePage'
 const Mater = ({children}) => {
     return (
@@ -18,6 +21,7 @@ export default ({ history }) => {
     <Router history={history}>
       <Route path="/" component={Mater}>
         <IndexRoute component={App}/>
+        <Route path='/photo' component={Photo} />
         <Route path='/setting'>
             <IndexRoute component={SettingPage}/>
             <Route path='about' component={About} />
@@ -35,6 +39,8 @@ export default ({ history }) => {
             <IndexRoute component={ListPage}/>
             <Route path=':itemId' component={ItemPage}/>
         </Route>
+        <Route path='/audits' component={Audits}/>
+        <Route path='/check' component={Check}/>
         <Route path='/create' component={CreatePage}/>
       </Route>
     </Router>

@@ -1,5 +1,6 @@
 import './index.html';
 import './index.css';
+import './custom.less';
 import createLoading from 'dva-loading';
 import { useRouterHistory } from 'dva/router';
 import { createHashHistory } from 'history';

@@ -14,8 +14,8 @@ export default {
     query: '',
     page: 1,
     activePath: null,
-    activeType: null,
-    itemsPerPage: 20,
+    activeType: 'all',
+    itemsPerPage: 15,
     lists: {
         customer: [],
         orders: [],
@@ -49,11 +49,12 @@ export default {
     },
     itemSubscriber({dispatch, history}) {
         return history.listen(({ pathname, query}) => {
+            let mode = query.mode
             for(let type of ITEM_PATHS) {
                 const match = pathToRegexp(`/${type}/:itemId`).exec(pathname);
                 if(match){
                     const itemId = match[1];
-                    const mode = query.mode
+
                     dispatch({
                         type: 'fetchComments',
                         payload: { type, itemId, mode},
@@ -74,7 +75,7 @@ export default {
                     totalPage = isEmtpy && ids.pages,
                     current = isEmtpy && ids.current,
                     next = isEmtpy && ids.next;
-        yield put({ type: 'saveList', payload: { data, path, totalPage, current }});
+        yield put({ type: 'saveList', payload: { data, path, totalPage, current, next }});
     },
     *fetchComments({ payload: { type, itemId, mode } }, { call, put }) {
         yield delay(300);
@@ -95,6 +96,21 @@ export default {
             }
         }
     }, {type: 'takeLatest'}],
+    *refetchList({ payload }, { call, select, put }) {
+        yield delay(300);
+        const page = yield select(state => state.list.page)
+        const path = yield select(state => state.list.activePath)
+        const activeType = yield select(state => state.list.activeType)
+        const itemsPerPage = yield select(state => state.list.itemsPerPage)
+        const oldDate = yield select(state => state.list.lists[path])
+        const ids = yield call(fetchIdsByType, path, activeType, itemsPerPage, page),
+                    isEmtpy = ids.code === 200,
+                    data = isEmtpy && oldDate.concat(ids.data),
+                    totalPage = isEmtpy && ids.pages,
+                    current = isEmtpy && ids.current,
+                    next = isEmtpy && ids.next;
+        yield put({ type: 'saveList', payload: { data, path, totalPage, current, next }});
+    }
  },
   reducers: {
     saveList(state, { payload: { data, path, totalPage, current, next } }) {

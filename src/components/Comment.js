@@ -1,5 +1,6 @@
 import React from 'react';
 import { List, InputItem, DatePicker, TextareaItem } from 'antd-mobile';
+import { DateGroup, InputGroup, TextareaGroup } from './CommentUI';
 import { createForm } from 'rc-form';
 const Item = List.Item;
 import styles from './Item.less';
@@ -13,7 +14,7 @@ let Comment = React.createClass({
         console.log(name);
     },
     drawing(){
-        const {ui, item, form: {getFieldsValue, getFieldDecorator, validateFields}} = this.props;
+        const { ui, item, form: { getFieldsValue, getFieldDecorator, validateFields } } = this.props;
         const layout = [];
         for(let attr in ui) {
             if(attr !== 'pick_list') {
@@ -25,35 +26,26 @@ let Comment = React.createClass({
                                 {ui[attr].fields.map((field, index) => {
                                     switch(field.uitype){
                                         case '17':
-                                            return <InputItem
-                                                    {...getFieldDecorator([field.fieldname], {
-                                                        initialValue: item[field.fieldname] || 'ss',
-                                                    })}
-                                                    size='sm'
-                                                    key={index}
-                                                    placeholder='点击编辑'
-                                                    className={styles.input}>
+                                            return  <InputGroup key={index} placeholder='点击编辑' className={styles.input}>
                                                         {field.fieldlabel}
-                                                    </InputItem>
+                                                    </InputGroup>
                                             break;
-
                                         case '5':
-                                            return  <DatePicker
-                                                        mode="date"
+                                            return  <DateGroup
                                                         title="选择日期"
                                                         key={index}
+                                                        name={field.fieldname}
+                                                        defaultValue={item[field.fieldname]}
                                                     >
-                                                        <Item arrow="horizontal" className={styles.item}>{field.fieldlabel}</Item>
-                                                    </DatePicker>
+                                                        <Item arrow="empty" className={styles.item}>{field.fieldlabel}</Item>
+                                                    </DateGroup>
                                             break
                                         case '19':
                                         case '21':
-                                            return <TextareaItem
+                                            return <TextareaGroup
                                                     placeholder="请输入"
                                                     key={index}
                                                     title={field.fieldlabel}
-                                                    autoHeight
-                                                    labelNumber={5}
                                                     name={field.fieldname}
                                                     className={styles.item}
                                                     defaultValue={item[field.fieldname]}

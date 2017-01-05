@@ -1,14 +1,11 @@
 import {
     fetchTypeList
 } from '../../services/create'
-
-
-
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default {
     namespace: 'create',
     state: {
-        typeList: {}
+        typeList: null
     },
     subscriptions: {
         setup({ dispatch, history }) {
@@ -25,13 +22,14 @@ export default {
         *queryUItype({ payload }, { call, put }) {
             yield delay(300);
             const { mode, type } = payload
-            let data = yield call(fetchTypeList, mode, type), typeDate = data.data
+            let data = yield call(fetchTypeList, mode, type),
+                typeDate = data.data
             yield put({type: 'saveUItypeList', payload: { typeDate }})
         }
     },
-    reduces: {
-        saveUItypeList(state, { payload }) {
-            return { ...state, typeList: {...payload} }
+    reducers: {
+        saveUItypeList(state, { payload: { typeDate } }) {
+            return { ...state, typeList: typeDate }
         }
     }
 }

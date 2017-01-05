@@ -13,7 +13,7 @@ const App = React.createClass({
                 <li><Link to="/contacts"><Icon type='mail'/><span>联系人</span></Link></li>
                 <li><Link to="/records"><i className="material-icons">&#xE8B0;</i>联系记录</Link></li>
                 <li><Link to="/orders"><i className="material-icons">&#xE8FE;</i>销售订单</Link></li>
-                <li><Link to="/audit"><i className="material-icons">&#xE90A;</i>审批中心</Link></li>
+                <li><Link to="/audits"><i className="material-icons">&#xE90A;</i>审批中心</Link></li>
                 <li><Link to="/check"><i className="material-icons">&#xE85E;</i>签到考勤</Link></li>
                 <li><Link to="/photo"><i className="material-icons">&#xE439;</i>拍照</Link></li>
                 <li><Link to="/bulletin"><i className="material-icons">&#xE85A;</i>公告</Link></li>

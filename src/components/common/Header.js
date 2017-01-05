@@ -41,6 +41,16 @@ class Header extends Component {
                 title = '创建'
                 rightContent=<div>保存</div>
                 break;
+            case '/photo':
+                title = '拍照'
+                break;
+            case '/audits':
+                title = '审批中心'
+                break;
+            case '/check':
+                title = '签到考勤'
+                rightContent = <div>历史<Icon type='notification' style={{paddingLeft: 8}}/></div>
+                break;
             default :
                 rightContent = <Icon type='logout'/>
                 title = '详情'

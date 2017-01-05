@@ -40,18 +40,36 @@ class ItemList extends React.Component {
                                         </div>
                             </Link>
                         </div>
-
+                case 'records':
+                    return  <div key={rowData.id} className={styles.items}>
+                    <Link to={{pathname:`/${props.activePath}/${rowData.id}`, query: {mode: 4}}}>
+                                <div className={classnames({[styles.item]: true, [styles.contacts]: true})}>
+                                    <p className={styles.text}>{rowData.text}</p>
+                                    <Flex className={styles.brief}>
+                                        <Flex.Item className={styles.i}><Icon type='cloud'/>{rowData.company}</Flex.Item>
+                                        <Flex.Item className={styles.i}><Icon type='tags-o'/>{rowData.position}</Flex.Item>
+                                    </Flex>
+                                    <span className={styles.btn}>{rowData.lastcontactdate}</span>
+                                </div>
+                    </Link>
+                            </div>
+                    break;
             }
             return
         }
         this._onEndReached = (event) => {
-            const { dispatch, totalPage, current, next } = this.props;
-            if(totalPage > current){
-                dispatch({
-                    type: 'list/refetchList',
-                    payload: next
-                })
-            }
+            const { dispatch, totalPage, current, next } = props;
+            // if(totalPage > current){
+            //     dispatch({
+            //         type: 'list/refetchList',
+            //         payload: next
+            //     })
+            // }
+        }
+        this._renderFooter = () => {
+            return  <div style={{ padding: 10, textAlign: 'center' }}>
+                        {this.state.isLoading ? '加载中...' : '加载完毕'}
+                    </div>
         }
     }
     _genRows(data){
@@ -119,7 +137,6 @@ class ItemList extends React.Component {
                     style={{height: 'calc(100vh - 1.78rem)', overflowX: 'hidden', backgroundColor: '#fff'}}
                     scrollRenderAheadDistance={500}
                     initialListSize={20}
-                    pageSize={4}
                     scrollEventThrottle={20}
                     onEndReached={this._onEndReached}
                     onEndReachedThreshold={20}
