@@ -25,10 +25,10 @@ const ListPage = ({
         })
     };
     let handleAciveType = (value) => {
-        dispatch(routerRedux.push({
-            pathname: '/' + activePath,
-            query: {type: value}
-        }))
+        dispatch({
+            type: 'list/fetchList',
+            payload: { path: activePath, activeType: value }
+        })
     };
     return (
         <Layout>

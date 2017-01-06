@@ -1,40 +1,33 @@
+import { fetchEnterpriseAccount, fetchPersonalAccount } from '../../services/app'
+
 export default {
     namespace: 'app',
     state: {
         login: false,
         loginButtonLoading: false,
-        user: {
-            name: "吴彦祖"
-        }
+        modelList: []
     },
     subscriptions: {
         setup({ dispatch }) {
-            dispatch({type: 'queryUser'})
+            dispatch({type: 'queryLoginStatus'})
         }
     },
     effects: {
-        *login({ paylod }, { call, put, select }) {
-            yield put({type: 'showLoginButtonLoading'})
-            const data = yield call(login, parse(payload))
-            if (data.success) {
-                yield put({type: 'loginSuccess', payload: { data }})
+        *login({ payload }, { call, put, select }) {
+            yield put({type: 'showLoginButtonLoading'});
+            const { corporate_account, username, password } = payload;
+            const EnterpriseAccountData = yield call(fetchEnterpriseAccount, corporate_account);
+            const PersonalAccountDate = yield call(fetchPersonalAccount, username, password);
+            if (EnterpriseAccountData.code === 1 && PersonalAccountDate.code === 200) {
+                yield put({type: 'loginSuccess', payload: { PersonalAccountDate }})
             } else {
-                yield put({type: 'loginFail', payload: { data }})
+                yield put({type: 'loginFail', payload: { PersonalAccountDate }})
             }
         },
-        *queryUser({ paylod }, { call, put }) {
-            const data = yield call(userInfo, parse(payload))
-            if(data.success) {
-                yield put({
-                    type: 'loginSuccess',
-                    payload: {
-                        user: {
-                            name: data.username
-                        }
-                    }
-                })
-            } else {
-
+        *queryLoginStatus({ payload }, { call, put }) {
+            const loginStatus = localStorage.getItem('zoogoooAccent');
+            if(loginStatus) {
+                yield put({ type: 'loginSuccess' })
             }
         },
         *logout({ payload }, { call, put }) {
@@ -50,7 +43,7 @@ export default {
                 ...state,
                 ...action.payload,
                 login: true,
-                loginButtonLoading: false
+                loginButtonLoading: false,
             }
         },
         loginFail(state) {

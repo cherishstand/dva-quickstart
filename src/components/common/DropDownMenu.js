@@ -36,7 +36,7 @@ const Popovers = React.createClass({
                     title={typeItem[type]}
                     className={classnames({[styles.item]: true, [styles.isFocus]: isFocused})}>
                         {typeItem[type]}
-                        {isFocused ? <Icon type='check' className={styles.icon}/> : null}
+                        {isFocused ? <Icon type='check' className={styles.icon} style={{color: '#ff4081'}}/> : null}
                 </Popover.Item>
             )
         }
@@ -63,7 +63,7 @@ const Popovers = React.createClass({
                         justifyContent: 'center'
                       }}
                     >
-                        {this.state.selected}<div className={classnames({[styles.caret]: true, [styles.down]: visible})}></div>
+                        {this.state.selected}<div className={styles.caret}></div>
                     </div>
                 </Popover>
         )

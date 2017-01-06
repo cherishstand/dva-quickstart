@@ -1,6 +1,6 @@
 import './index.html';
 import './index.css';
-import './custom.less';
+// import './custom.less';
 import createLoading from 'dva-loading';
 import { useRouterHistory } from 'dva/router';
 import { createHashHistory } from 'history';
@@ -13,6 +13,7 @@ const app = dva();
 app.use(createLoading());
 
 // 3. Model
+app.model(require('./models/app'));
 app.model(require('./models/create'));
 app.model(require('./models/list'));
 

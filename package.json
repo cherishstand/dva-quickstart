@@ -6,7 +6,7 @@
   "theme": "./src/theme.js",
   "dependencies": {
     "antd": "^2.5.2",
-    "antd-mobile": "^0.9.12",
+    "antd-mobile": "^0.9.13",
     "assets": "^2.1.0",
     "babel-plugin-import": "^1.1.0",
     "classnames": "^2.2.5",

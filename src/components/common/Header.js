@@ -11,7 +11,7 @@ class Header extends Component {
         let iconName = 'left'
         let rightContent = null
         let title = ''
-        const { path, loading, handleAciveType} = this.props;
+        const { path, loading, handleAciveType, headerTitle} = this.props;
         switch(path){
             case '/':
                 iconName = null
@@ -38,7 +38,6 @@ class Header extends Component {
                 title = '意见反馈'
                 break
             case '/create':
-                title = '创建'
                 rightContent=<div>保存</div>
                 break;
             case '/photo':
@@ -66,7 +65,7 @@ class Header extends Component {
                     onLeftClick={this.context.router.goBack}
                     className={styles.boxshow}
                     >
-                        {title}
+                        {headerTitle || title}
                     </NavBar>
             </div>
         )

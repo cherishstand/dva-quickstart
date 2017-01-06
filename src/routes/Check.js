@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/common/Header'
-import { Tabs, Flex, Button } from 'antd-mobile'
+import { Tabs, Flex, Button, WhiteSpace } from 'antd-mobile'
 import styles from './Check.less'
 const TabPane = Tabs.TabPane;
 
@@ -67,9 +67,10 @@ const Check = ({
             <Tabs defaultActiveKey='1' destroyInactiveTabPane={true}>
                 <TabPane tab="我的签到" key="1">
                     <div className={styles.content}>
-                        <Map className={styles.map} style={{height: 'calc(100vh - 3.71rem)'}}/>
+                        <Map className={styles.map} style={{height: 'calc(100vh - 3.81rem)'}}/>
                         <div className={styles.click}>
                             <input type='text' placeholder='请点击选择客户'/>
+                            <WhiteSpace size='lg'/>
                             <input type='text' placeholder='请输入描述'/>
                             <Button size="small" type="primary" inline className={styles.btn}>签到</Button>
                         </div>

@@ -1,12 +1,28 @@
 import React from 'react';
-import { RefreshControl, ListView , List, ActivityIndicator, Icon, Flex} from 'antd-mobile';
+import {ListView , List, Icon, Flex, Popup, Button, WhiteSpace} from 'antd-mobile';
 import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import classnames from 'classnames';
 import styles from './ItemList.less';
 import {Link} from 'dva/router';
 import Spinner from './common/Spinner';
+let wrapProps;
 const Item = List.Item;
 const Brief = Item.Brief;
+const handleClose = () => {
+    Popup.hide()
+}
+const PopupContent = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const touchPhone = event.currentTarget.getAttribute('data-value');
+    Popup.show(
+        <div style={{padding: 30}}>
+            <Button type='primary' onClick={handleClose}><a href={`tel:${touchPhone}`}>{`拨打:${touchPhone}`}</a></Button>
+            <WhiteSpace size='lg'/>
+            <Button type='ghost' onClick={handleClose} style={{backgroundColor: '#ddd', color: '#fff', border: 'none'}}>取消</Button>
+        </div>, { animationType: 'slide-up' }
+    )
+}
 class ItemList extends React.Component {
     constructor(props){
         super(props);
@@ -36,7 +52,7 @@ class ItemList extends React.Component {
                                                 <Flex.Item className={styles.i}><Icon type='tags-o'/>{rowData.position}</Flex.Item>
                                                 <Flex.Item className={styles.i}><Icon type='share-alt'/>{rowData.mobile}</Flex.Item>
                                             </Flex>
-                                            <span className={styles.btn}><Icon type='phone'/></span>
+                                            <span className={styles.btn} onClick={PopupContent} data-value={rowData.mobile}><Icon type='phone' /></span>
                                         </div>
                             </Link>
                         </div>

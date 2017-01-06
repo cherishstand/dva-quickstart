@@ -1,11 +1,10 @@
-
 :global{
     html, body, #root {
         height: 100%;
     }
 }
 body{
-    background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url('./assets/background.jpg') no-repeat;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url('./assets/images/background.jpg') no-repeat;
     width: 100vw;
     height: 100vh;
     background-size: cover;

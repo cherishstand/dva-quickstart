@@ -19,7 +19,7 @@ const Mater = ({children}) => {
 export default ({ history }) => {
   return (
     <Router history={history}>
-      <Route path="/" component={Mater}>
+      <Route path="/">
         <IndexRoute component={App}/>
         <Route path='/photo' component={Photo} />
         <Route path='/setting'>
