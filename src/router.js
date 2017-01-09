@@ -25,7 +25,7 @@ export default ({ history }) => {
         <Route path='/setting'>
             <IndexRoute component={SettingPage}/>
             <Route path='about' component={About} />
-            <Route path='opinion' component={Login} />
+            <Route path='opinion' component={Opinion} />
         </Route>
         <Route path='/customer'>
             <IndexRoute component={ListPage}/>
@@ -46,3 +46,19 @@ export default ({ history }) => {
     </Router>
   );
 };
+
+// export default ({ history, app }) => {
+//     const routes = [
+//         {
+//             path: '/',
+//             component: App,
+//             getIndexRoute(nextState, cb) {
+//                 require.ensure([], require => {
+//                     app.model(require('./models/app'))
+//                     cb(null, {component: require('./routes/App')})
+//                 })
+//             }
+//         }
+//     ]
+//     return <Router history={history} routes={routes}/>
+// }

@@ -5,5 +5,5 @@ module.exports = {
   logoSrc:'http://www.zoogooo.com/Public/Home/images/logo.png',
   logoText:'zoogooo',
   clientVersion: '1.0.0',
-  needLogin:true,
+  needLogin: true,
 };

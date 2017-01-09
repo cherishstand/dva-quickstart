@@ -16,7 +16,7 @@ const Search = React.createClass({
       console.log(1);
   },
   render() {
-    return (<div>
+    return (<div id='search'>
       <SearchBar
         value={this.props.value || ''}
         placeholder="搜索"

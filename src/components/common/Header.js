@@ -2,8 +2,9 @@ import React ,{ Component, PropTypes } from 'react';
 import { NavBar, Icon, Popover } from 'antd-mobile';
 import { Link } from 'dva/router';
 import Popovers from './Popovers';
-import {CONFIG} from '../../utils/typeItem';
-import DropDownMenu from './DropDownMenu';
+import { CONFIG } from '../../utils/typeItem';
+import HeaderMenu from './HeaderMenu';
+import Modals from './Modals';
 import styles from './Header.css';
 
 class Header extends Component {
@@ -21,12 +22,12 @@ class Header extends Component {
             case '/contacts':
             case '/customer':
                 rightContent = <Popovers path={path}><Icon type='plus'/></Popovers>
-                title = <DropDownMenu
+                title = <HeaderMenu
                             path={path}
                             handleAciveType={handleAciveType}
                             typeItem={CONFIG[path.replace('/', '')]}
                         >
-                        </DropDownMenu>
+                        </HeaderMenu>
                 break
             case '/setting':
                 title = '设置'
@@ -38,7 +39,7 @@ class Header extends Component {
                 title = '意见反馈'
                 break
             case '/create':
-                rightContent=<div>保存</div>
+                rightContent=<Modals>保存</Modals>
                 break;
             case '/photo':
                 title = '拍照'
@@ -56,7 +57,7 @@ class Header extends Component {
                 break;
         }
         return(
-            <div>
+            <div id='header'>
                 <NavBar
                     leftContent={iconName ? '返回': null}
                     iconName={iconName}

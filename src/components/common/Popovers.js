@@ -25,6 +25,7 @@ const Popovers = React.createClass({
                     mask
                     visible={this.state.visible}
                     name='createMenu'
+                    openMenu={(name) => console.log(name)}
                     className={styles.inner}
                     overlay={[
                         (<Link to={{pathname: '/create', query: {mode: 6}}}>

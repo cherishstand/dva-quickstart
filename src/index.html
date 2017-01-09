@@ -7,14 +7,8 @@
     <meta name="apple-mobile-web-app-title" content="卓谷科技有限公司">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>Dva Demo</title>
+    <title>卓谷OA系统</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="http://api.map.baidu.com/api?v=2.0&ak=GFYCNDzymFj8tBFAZqzRUyUHqU6Lt2bR" type="text/javascript"></script>
-</head>
-
-<body>
-    <div id="root"></div>
-    <script src="index.js"></script>
     <script>
         (function(baseFontSize, fontscale) {
             var _baseFontSize = baseFontSize || 100;
@@ -43,6 +37,20 @@
         })();
         if (!window.Promise) {
             document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"' + '>' + '<' + '/' + 'script>');
+        }
+    </script>
+    <!-- <script src="http://api.map.baidu.com/api?v=2.0&ak=GFYCNDzymFj8tBFAZqzRUyUHqU6Lt2bR" type="text/javascript"></script> -->
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="index.js"></script>
+    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+    <script>
+        if ('addEventListener' in document) {
+            window.addEventListener('load', function() {
+                FastClick.attach(document.body);
+            }, false)
         }
     </script>
 </body>

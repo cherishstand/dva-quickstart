@@ -13,7 +13,7 @@ const app = dva();
 app.use(createLoading());
 
 // 3. Model
-app.model(require('./models/app'));
+// app.model(require('./models/app'));
 app.model(require('./models/create'));
 app.model(require('./models/list'));
 

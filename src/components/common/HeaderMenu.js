@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { Popover, Icon } from 'antd-mobile';
+import { Popover, Icon, Menu } from 'antd-mobile';
 import classnames from 'classnames';
 import { Link } from 'dva/router';
-import styles from './DropDownMenu.less';
+import styles from './HeaderMenu.less';
 const LIST_TYPE = {
     customer: {'all': '全部','may':'潜在客户','vip':'VIP客户','dealed':'成交客户','hot':'热点客户','tdays':'30天未更新','month':'本月创建'}
 }

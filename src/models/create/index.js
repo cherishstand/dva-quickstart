@@ -5,6 +5,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default {
     namespace: 'create',
     state: {
+        isFocusSave: false,
         typeList: null
     },
     subscriptions: {

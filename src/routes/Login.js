@@ -13,10 +13,15 @@ let Login = ({
         getFieldProps
     }
 }) => {
-    function handleOk() {
+    function handleOk(event) {
+        event.preventDefault();
         validateFields((error, values) => {
-            if(error)return
-            onOK(values);
+            if (!error) {
+                onOK(values);
+            } else {
+                return false;
+            }
+
         })
     }
     document.onkeyup = e => e.keycode===13 && handleOk()
@@ -27,32 +32,17 @@ let Login = ({
             </div>
             <form>
                 {getFieldDecorator('corporate_account', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请填写企业帐号'
-                        }
-                    ]
+                    rules: [{required: true, message: '请填写企业帐号'}]
                 })(<InputItem placeholder='请填写企业帐号'>企业帐号</InputItem>)}
                 {getFieldDecorator('username', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请填写个人帐号'
-                        }
-                    ]
+                    rules: [{required: true, message: '请填写个人帐号'}]
                 })(<InputItem placeholder='请填写个人帐号'>个人帐号</InputItem>)}
                 {getFieldDecorator('password', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请填写密码'
-                        }
-                    ]
+                    rules: [{required: true, message: '请填写密码'}]
                 })(<InputItem placeholder='请填写密码' type='password'>密码</InputItem>)}
+                <WhiteSpace size='lg'/>
+                <Button type='primary' onClick={handleOk} loading={loginButtonLoading}>登录</Button>
             </form>
-            <WhiteSpace size='lg'/>
-            <Button type='primary' onClick={handleOk} loading={loginButtonLoading}>登录</Button>
         </div>
     )
 }

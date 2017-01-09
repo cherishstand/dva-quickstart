@@ -5,21 +5,17 @@ import classnames from 'classnames';
 import styles from './ItemList.less';
 import {Link} from 'dva/router';
 import Spinner from './common/Spinner';
-let wrapProps;
 const Item = List.Item;
 const Brief = Item.Brief;
-const handleClose = () => {
-    Popup.hide()
-}
 const PopupContent = (event) => {
     event.stopPropagation();
     event.preventDefault();
     const touchPhone = event.currentTarget.getAttribute('data-value');
     Popup.show(
-        <div style={{padding: 30}}>
-            <Button type='primary' onClick={handleClose}><a href={`tel:${touchPhone}`}>{`拨打:${touchPhone}`}</a></Button>
+        <div className={styles.popup}>
+            <Button type='primary' onClick={() => Popup.hide()}><a href={`tel:${touchPhone}`}>{`拨打:${touchPhone}`}</a></Button>
             <WhiteSpace size='lg'/>
-            <Button type='ghost' onClick={handleClose} style={{backgroundColor: '#ddd', color: '#fff', border: 'none'}}>取消</Button>
+            <Button type='ghost' onClick={() => Popup.hide()} style={{backgroundColor: '#ddd', color: '#fff', border: 'none'}}>取消</Button>
         </div>, { animationType: 'slide-up' }
     )
 }
@@ -143,7 +139,7 @@ class ItemList extends React.Component {
     render(){
         const { dataSource } = this.props;
         return(
-            <div>
+            <div id='warp'>
             {
                 dataSource && dataSource instanceof Array
                 ? <ListView

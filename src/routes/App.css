@@ -16,9 +16,9 @@ nav .menu li{
 nav .menu li>a{
     display: inline-block;
     width: 100%;
-    padding: .4rem 0;
+    padding: 40px 0;
     color: #fff;
-	font-size: .28rem;
+	font-size: 28px;
     text-decoration: none;
 }
 nav .menu li:nth-child(1) {
@@ -55,5 +55,5 @@ nav .menu a i {
 	display: block !important;
 	margin:0 auto;
 	color: #fff !important;
-  	padding-bottom: .1rem;
+  	padding-bottom: 10px;
 }

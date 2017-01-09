@@ -25,9 +25,11 @@ const CreatePage = ({
     }
     return (
         <div>
-            <Header path={pathname} headerTitle={ query.type ? '快速创建' : '创建' }/>
+            <Header path={pathname} headerTitle={ query.type ? '快速创建' : '创建' } />
             {
-                <List className={styles.createPage}>
+                loading
+                ?  <Loading />
+                : <List className={styles.createPage}>
                     {() => pages()}
                 </List>
             }
@@ -37,6 +39,6 @@ const CreatePage = ({
 export default connect(state => {
     return {
         loading: state.loading.models.create,
-        typeList:state.create.typeList
+        ...state.create
     }
 })(CreatePage)

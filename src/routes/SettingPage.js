@@ -1,18 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../components/common/Header';
 import { Link } from 'dva/router';
+import { connect } from 'dva';
+import Loading from '../components/common/Loading';
 import { WhiteSpace, Button, Flex, Toast } from 'antd-mobile';
 import styles from './SettingPage.less';
 import Layout from '../components/Layout';
 const SettingPage = React.createClass({
     _handleClick(){
-        Toast.info('清除缓存成功', 20);
+        Toast.info('清除缓存成功', 1);
     },
     _loginOut() {
         console.log(1);
     },
     render(){
-        const { location } = this.props;
+        const { location, loading } = this.props;
         return(
             <div>
                 <Header path={location.pathname}/>
@@ -32,4 +34,8 @@ const SettingPage = React.createClass({
         )
     }
 })
-export default SettingPage;
+export default connect(state => {
+    return {
+        loading: state.loading.global
+    }
+})(SettingPage);

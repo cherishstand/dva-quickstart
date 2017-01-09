@@ -1,5 +1,6 @@
-import { fetchEnterpriseAccount, fetchPersonalAccount } from '../../services/app'
-
+import { fetchEnterpriseAccount, fetchPersonalAccount } from '../../services/app';
+import qs from 'qs';
+const delay = ms => new Promise((resolve) => setTimeout(resolve, ms));
 export default {
     namespace: 'app',
     state: {
@@ -13,22 +14,15 @@ export default {
         }
     },
     effects: {
-        *login({ payload }, { call, put, select }) {
+        *login({ payload }, { call, put }) {
             yield put({type: 'showLoginButtonLoading'});
-            const { corporate_account, username, password } = payload;
-            const EnterpriseAccountData = yield call(fetchEnterpriseAccount, corporate_account);
-            const PersonalAccountDate = yield call(fetchPersonalAccount, username, password);
-            if (EnterpriseAccountData.code === 1 && PersonalAccountDate.code === 200) {
-                yield put({type: 'loginSuccess', payload: { PersonalAccountDate }})
-            } else {
-                yield put({type: 'loginFail', payload: { PersonalAccountDate }})
-            }
+            const enterprise = yield call(fetchEnterpriseAccount, qs.parse(payload))
         },
         *queryLoginStatus({ payload }, { call, put }) {
             const loginStatus = localStorage.getItem('zoogoooAccent');
-            if(loginStatus) {
-                yield put({ type: 'loginSuccess' })
-            }
+            // if(loginStatus) {
+            //     yield put({ type: 'loginSuccess' })
+            // }
         },
         *logout({ payload }, { call, put }) {
             const data = yield call(logout, parse(payload))
@@ -49,7 +43,7 @@ export default {
         loginFail(state) {
             return {
                 ...state,
-                login: false,
+                login: true,
                 loginButtonLoading: false
             }
         },
