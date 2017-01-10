@@ -12,11 +12,11 @@ const CreatePage = ({
 }) => {
     let pages = () => {
         let layout = [];
-        for(let key of typeList) {
-            if(key !== 'pick_list') {
+        for(let attr of typeList) {
+            if(attr !== 'pick_list') {
                 layout.push(
-                    <div key={key}>
-                        <div className={styles.subheader}>{typeList[key].blocklabel}</div>
+                    <div key={attr}>
+                        <div className={styles.subheader}>{typeList[attr].blocklabel}</div>
                     </div>
                 )
             }

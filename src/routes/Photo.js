@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from '../components/common/Header'
-import { Button, WhiteSpace, WingBlank, Popup, Toast } from 'antd-mobile'
+import { Button, WhiteSpace, WingBlank, Popup, Toast } from 'antd-mobile';
+import { routerRedux } from 'dva/router';
+import { connect } from 'dva';
 import styles from './Photo.less';
 const onFileChange = (event) => {
     if(event.target.files && event.target.files.length) {
@@ -45,14 +47,20 @@ const PopupContent = () => {
     )
 }
 const Photo = ({
-    location: { pathname }
+    location: { pathname },
+    dispatch
 }) => {
+    function refentchMore() {
+        dispatch(routerRedux.push({
+            pathname: '/setting'
+        }))
+    }
     return (
         <div>
             <Header path={pathname}/>
             <div className={styles.container}>
                 <div>
-                    <input type='text' placeholder='请选择客户' onFocus={() => console.log(1)}/>
+                    <input type='text' placeholder='请选择客户' onFocus={refentchMore}/>
                     <WhiteSpace size='lg' />
                     <input type='text' placeholder='请输入描述'/>
                     <WhiteSpace size='lg' />
@@ -66,4 +74,4 @@ const Photo = ({
         </div>
     )
 }
-export default Photo
+export default connect()(Photo)

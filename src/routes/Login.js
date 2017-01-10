@@ -1,6 +1,7 @@
 import React , { PropTypes }from 'react';
 import {createForm} from 'rc-form';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
+import classnames from 'classnames';
 import qs from 'qs';
 import config from '../utils/config';
 import styles from './Login.less';
@@ -41,7 +42,7 @@ let Login = ({
                     rules: [{required: true, message: '请填写密码'}]
                 })(<InputItem placeholder='请填写密码' type='password'>密码</InputItem>)}
                 <WhiteSpace size='lg'/>
-                <Button type='primary' onClick={handleOk} loading={loginButtonLoading}>登录</Button>
+                <Button onClick={handleOk} loading={loginButtonLoading} style={{backgroundColor: '#6bcd49', color: '#fff'}}>登录</Button>
             </form>
         </div>
     )

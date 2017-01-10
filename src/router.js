@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute, Redirect } from 'dva/router';
+import NProgress from 'nprogress'
 import App from './routes/App';
 import SettingPage from './routes/SettingPage';
 import ItemPage from './routes/ItemPage';
@@ -20,16 +21,16 @@ export default ({ history }) => {
   return (
     <Router history={history}>
       <Route path="/">
-        <IndexRoute component={App}/>
+        <IndexRoute component={App} />
         <Route path='/photo' component={Photo} />
         <Route path='/setting'>
             <IndexRoute component={SettingPage}/>
             <Route path='about' component={About} />
-            <Route path='opinion' component={Opinion} />
+            <Route path='opinion' component={Login} />
         </Route>
-        <Route path='/customer'>
+        <Route path='/customer' onEnter={() => NProgress.start()}>
             <IndexRoute component={ListPage}/>
-            <Route path=':itemId' component={ItemPage}/>
+            <Route path=':itemId' component={ItemPage} />
         </Route>
         <Route path='/contacts'>
             <IndexRoute component={ListPage}/>

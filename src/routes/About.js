@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from 'antd-mobile';
 import Header from '../components/common/Header';
 import styles from './About.less';
+import config from '../utils/config';
 const About = React.createClass({
     render(){
         return(
@@ -9,7 +10,7 @@ const About = React.createClass({
                 <Header path={this.props.location.pathname}/>
                 <div className={styles.view}>
                     <div className={styles.logo}>
-                        <img src='http://www.zoogooo.com/Public/Home/images/logo.png'></img>
+                        <img src={config.logoSrc}></img>
                         <p>{'版本:1.0.0'}</p>
                     </div>
                     <div className={styles.des}>我公司秉承“为客户创造价值”的经营理念，致力于为中小企业提供客户关系管理（CRM）和销售管理解决方案，帮助中小企业提高运营效率，节约运营成本，促进企业成长。</div>
